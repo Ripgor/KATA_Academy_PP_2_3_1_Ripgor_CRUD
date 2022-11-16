@@ -39,7 +39,7 @@ public class UsersController {
     // -инициализация значений в поля этого объекта из HTML-формы
     // -передача готового объекта в model
     @GetMapping("/new")
-    public String addUser(@ModelAttribute("user") User user) {
+    public String getViewForCreateUsers(@ModelAttribute("user") User user) {
 
         return "users/new";
     }
@@ -60,7 +60,7 @@ public class UsersController {
 
     // После работы метода вызывается метод update
     @GetMapping("/{id}/edit")
-    public String editUser(Model model, @PathVariable("id") int id) {
+    public String getViewForEditUser(Model model, @PathVariable("id") int id) {
         model.addAttribute("user", userService.showUser(id));
 
         return "users/edit";
