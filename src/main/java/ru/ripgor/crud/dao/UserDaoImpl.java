@@ -15,17 +15,17 @@ public class UserDaoImpl implements UserDao {
     private EntityManager eManager;
 
     @Override
-    public void save(User user) {
+    public void saveUser(User user) {
         eManager.persist(user);
     }
 
     @Override
-    public List<User> index() {
+    public List<User> getAllUsers() {
         return eManager.createQuery("from User", User.class).getResultList();
     }
 
     @Override
-    public User show(int id) {
+    public User showUser(int id) {
         return eManager.find(User.class, id);
     }
 
@@ -34,7 +34,7 @@ public class UserDaoImpl implements UserDao {
     // назначаю пользователю параметры, пришедшие из представления
     // меняю запись в БД
     @Override
-    public void update(int id, User user) {
+    public void updateUser(int id, User user) {
         User userToUpdate = eManager.find(User.class, id);
         eManager.detach(userToUpdate);
         userToUpdate.setName(user.getName());
@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void delete(int id) {
+    public void deleteUser(int id) {
         eManager.remove(eManager.find(User.class, id));
     }
 }

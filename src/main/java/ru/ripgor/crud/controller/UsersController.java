@@ -18,8 +18,8 @@ public class UsersController {
 
     // Метод для отображения списка пользователей
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("users", userService.index());
+    public String getAllUsers(Model model) {
+        model.addAttribute("users", userService.getAllUsers());
 
         return "users/index";
     }
@@ -27,8 +27,8 @@ public class UsersController {
     // Метод для отображения информации об отдельном пользователе.
     // Принимает id, на основе которого в представлении генерируется динамическая ссылка для каждого пользователя
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userService.show(id));
+    public String showUser(@PathVariable("id") int id, Model model) {
+        model.addAttribute("user", userService.showUser(id));
 
         return "users/show";
     }
@@ -39,7 +39,7 @@ public class UsersController {
     // -инициализация значений в поля этого объекта из HTML-формы
     // -передача готового объекта в model
     @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user) {
+    public String addUser(@ModelAttribute("user") User user) {
 
         return "users/new";
     }
@@ -47,8 +47,8 @@ public class UsersController {
     // Метод, который вызывается после newUser.
     // Перенаправляет на /users с добавлением нового пользователя в БД
     @PostMapping()
-    public String create(@ModelAttribute("user") User user) {
-        userService.save(user);
+    public String createUser(@ModelAttribute("user") User user) {
+        userService.saveUser(user);
 
         return "redirect:/users";
     }
@@ -60,16 +60,16 @@ public class UsersController {
 
     // После работы метода вызывается метод update
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("user", userService.show(id));
+    public String editUser(Model model, @PathVariable("id") int id) {
+        model.addAttribute("user", userService.showUser(id));
 
         return "users/edit";
     }
 
     // Простое перенаправление с изменением БД, аналогичное методу create
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-        userService.update(id, user);
+    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+        userService.updateUser(id, user);
 
         return "redirect:/users";
     }
@@ -77,8 +77,8 @@ public class UsersController {
     // Ссылка на удаление находится в show.html
     // При нажатии происходит изменение БД и redirect на основную, уже измененную, страницу
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
-        userService.delete(id);
+    public String deleteUser(@PathVariable("id") int id) {
+        userService.deleteUser(id);
 
         return "redirect:/users";
     }
