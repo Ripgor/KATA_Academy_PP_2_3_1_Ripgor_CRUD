@@ -29,6 +29,10 @@ public class UserDaoImpl implements UserDao {
         return eManager.find(User.class, id);
     }
 
+    // Нахожу пользователя по id
+    // отсоединяю
+    // назначаю пользователю параметры, пришедшие из представления
+    // меняю запись в БД
     @Override
     public void update(int id, User user) {
         User userToUpdate = eManager.find(User.class, id);

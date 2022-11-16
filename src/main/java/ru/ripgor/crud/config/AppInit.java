@@ -24,6 +24,8 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         return new String[]{"/"};
     }
 
+    // Следующие два метода -- для того, чтобы мы Thymeleaf мог отправлять скрытые HTTP-запросы,
+    // так как HTML поддерживает только GET и POST
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
